@@ -13,11 +13,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//PUBLIC PATHS
+
 Route::get('/', function () {
-    return view('welcome');
+    if(Auth::check()){
+        return redirect("/home");
+    }else{
+        return view('welcome');
+    } 
 });
 
 Auth::routes();
+
+//Route for Survey controller
+Route::get('/surveys/{questionaire}-{slug}','SurveyController@show');
+Route::post('/surveys/{questionaire}-{slug}','SurveyController@store');
+
+
+
+
+
+//PROTECTED PATHS
 
 // Route for Questionaire Controller
 Route::get('/home', 'QuestionaireController@index')->name('home');
@@ -29,3 +45,5 @@ Route::delete('/questionaire/{questionaire}','QuestionaireController@destroy');
 // Routes for Question controller
 Route::get('/questionaires/{questionaire}/questions/create','QuestionController@create');
 Route::post('/questionaires/{questionaire}/questions','QuestionController@store');
+Route::delete('/questionaires/{questionaire}/questions/{question}','QuestionController@destroy');
+

@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 
 class QuestionaireController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(){
-        $questionaires = \App\Questionaire::all();
-        // dd($questionaires);
+        $questionaires = auth()->user()->questionaire;
         return view('home',compact('questionaires'));
     }
     public function create(){
@@ -27,7 +31,7 @@ class QuestionaireController extends Controller
     }
 
     public function show(\App\Questionaire $questionaire){
-        $questionaire->load('question');
+        $questionaire->load('question.answer.responses');
         
         return view('questionaire.show',compact('questionaire'));
     }

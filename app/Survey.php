@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Answer extends Model
+class Survey extends Model
 {
     protected $guarded = [];
 
-    public function question(){
-        return $this->belongsTo(Question::class);
+    public function questionaire(){
+        return $this->belongsTo(Questionaire::class);
     }
 
     public function responses(){

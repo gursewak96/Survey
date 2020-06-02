@@ -9,15 +9,15 @@
         </div>
         <div class="modal-body">
             <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="copy shareable link" value="http://localhost/surveys/{{$questionaire->id}}-{{Str::slug($questionaire->title)}}" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="text" class="form-control" placeholder="copy shareable link" value={{$questionaire->publicPath()}} aria-label="Recipient's username" aria-describedby="basic-addon2">
                 <div class="input-group-append" onclick="copyToClipboard(event)" style="cursor: pointer">
                   <span class="input-group-text" id="basic-addon2" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Copy Link</span>
                 </div>
               </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal"><i class="fab fa-whatsapp"></i>
-          </button>
+          <a href="https://api.whatsapp.com/send?text={{urlencode($questionaire->publicPath())}}" class="d-block btn btn-success"><i class="fab fa-whatsapp"></i>
+          </a>
           <button type="button" class="btn btn-primary"><i class="fab fa-facebook-f"></i></button>
         </div>
       </div>
